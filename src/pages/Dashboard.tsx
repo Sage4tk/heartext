@@ -3,13 +3,17 @@ import { Button } from "../components/ui/button";
 import { useUser } from "../components/Wrappers/AuthWrapper";
 import { auth } from "../lib/firebase";
 import { toast } from "sonner";
+import HeaderTabs from "../components/Dashboard/HeaderTabs";
 
 const Dashboard:React.FC = () => {
     const user = useUser();
 
     return (
         <div>
-            <h1>DASHBOARD PAGE</h1>
+
+            <HeaderTabs />
+
+            {/* <h1>DASHBOARD PAGE</h1>
 
             {user.user ? (
                 <div>
@@ -19,7 +23,8 @@ const Dashboard:React.FC = () => {
                 </div>
             ): (
                 <div>NO USEr</div>
-            )}
+            )} */}
+
         </div>
     )
 }
