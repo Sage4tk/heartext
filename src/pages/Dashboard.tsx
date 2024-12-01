@@ -4,6 +4,7 @@ import { useUser } from "../components/Wrappers/AuthWrapper";
 import { auth } from "../lib/firebase";
 import { toast } from "sonner";
 import HeaderTabs from "../components/Dashboard/HeaderTabs";
+import FeatureCards from "@/components/Dashboard/FeatureCards";
 
 const Dashboard:React.FC = () => {
     const user = useUser();
@@ -24,6 +25,8 @@ const Dashboard:React.FC = () => {
             ): (
                 <div>NO USEr</div>
             )} */}
+
+            <FeatureCards />
 
         </div>
     )
