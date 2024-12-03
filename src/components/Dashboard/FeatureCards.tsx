@@ -2,6 +2,7 @@ import { Mic, VolumeIcon as VolumeUp } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export const FeatureCards:React.FC = () => {
     return (
@@ -10,36 +11,38 @@ export const FeatureCards:React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{duration: 0.6, delay: 0.3}}
         >
-            <Card>
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                <VolumeUp className="h-6 w-6" />
-                Text-to-Speech
-                </CardTitle>
-                <CardDescription>Convert text into spoken audio</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p>Quickly transform written content into natural-sounding speech.</p>
-            </CardContent>
-            <CardFooter>
-                <Button>Start TTS</Button>
-            </CardFooter>
+            <Card
+                className={cn("transform transition-all hover:-translate-y-1" )}
+            >
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                    <VolumeUp className="h-6 w-6" />
+                    Text-to-Speech
+                    </CardTitle>
+                    <CardDescription>Convert text into spoken audio</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <p>Quickly transform written content into natural-sounding speech.</p>
+                </CardContent>
+                <CardFooter>
+                    <Button>Start TTS</Button>
+                </CardFooter>
             </Card>
 
-            <Card>
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                <Mic className="h-6 w-6" />
-                Speech-to-Text
-                </CardTitle>
-                <CardDescription>Convert spoken words into text</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p>Accurately transcribe spoken words into written text.</p>
-            </CardContent>
-            <CardFooter>
-                <Button>Start STT</Button>
-            </CardFooter>
+            <Card className={cn("transform transition-all hover:-translate-y-1" )}>
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                    <Mic className="h-6 w-6" />
+                    Speech-to-Text
+                    </CardTitle>
+                    <CardDescription>Convert spoken words into text</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <p>Accurately transcribe spoken words into written text.</p>
+                </CardContent>
+                <CardFooter>
+                    <Button>Start STT</Button>
+                </CardFooter>
             </Card>
         </motion.div>
     )

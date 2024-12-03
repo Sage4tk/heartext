@@ -1,11 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import { Toaster } from "./components/ui/sonner";
 /** PAGES */
 import Landing from "./pages/Landing";
 import AuthWrapper from "./components/Wrappers/AuthWrapper";
 import Dashboard from "./pages/Dashboard";
-import { Toaster } from "./components/ui/sonner";
 import DashboardLayout from "./components/Wrappers/DashboardLayout";
+import STT from "./pages/STT";
+
 
 const router = createBrowserRouter([
     {
@@ -36,8 +37,12 @@ const router = createBrowserRouter([
       element: <DashboardLayout />,
       children: [
         {
-          path: "",
+          index: true,
           element: <Dashboard />
+        },
+        {
+          path: "speech-to-text",
+          element: <STT />
         }
       ]
     }

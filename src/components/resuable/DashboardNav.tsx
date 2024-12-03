@@ -25,7 +25,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { title: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { title: 'Speech to Text', href: '/stt', icon: Mic2 },
+  { title: 'Speech to Text', href: '/dashboard/speech-to-text', icon: Mic2 },
   { title: 'Text to Speech', href: '/tts', icon: Volume2 },
   { title: 'Payments', href: '/payments', icon: CreditCard },
 ]
@@ -122,7 +122,7 @@ const NavLink:React.FC<{
       to={item.href}
       className={cn(
         'group flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground',
-        pathname === item.href ? 'bg-accent' : 'transparent'
+        pathname === item.href ? 'bg-border' : 'transparent'
       )}
     >
       <item.icon className="mr-2 h-4 w-4" />
