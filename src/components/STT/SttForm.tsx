@@ -4,6 +4,7 @@ import { Textarea } from "../ui/textarea";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 const SttForm:React.FC = () => {
 
@@ -18,8 +19,10 @@ const SttForm:React.FC = () => {
     /* FUNCTIONS */
     const startRecording = async ():Promise<void> => {
 
+        // clear out URL if there's an existing one.
+        setAudioUrl(null);
+
         try {
-            
             // get stream to record
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             const mediaRecorder = new MediaRecorder(stream);
@@ -29,16 +32,20 @@ const SttForm:React.FC = () => {
 
             // push blop into ref
             mediaRecorder.ondataavailable = (event) => {
+
                 audioChunksRef.current.push(event.data);
+
             }
 
             // stop event to combine the audio
             mediaRecorder.onstop = () => {
-                const audioBlob = new Blob(audioChunksRef.current, { type: "audio/wav"});
+
+                const audioBlob = new Blob(audioChunksRef.current, { type: "audio/wav" });
                 const audioUrl = URL.createObjectURL(audioBlob);
 
                 // set state to URL
                 setAudioUrl(audioUrl);
+
             }
 
             // start recording
@@ -48,6 +55,14 @@ const SttForm:React.FC = () => {
             setIsRecording(true);
 
         } catch (err) {
+            
+            // show user that the microphone isn't allowed
+            if (err instanceof DOMException && err.name === "NotAllowedError") {
+                toast("Please allow browser to access microphone.");
+            } else {
+                toast("Something went wrong.")
+            }
+            
 
         }
 
@@ -60,9 +75,15 @@ const SttForm:React.FC = () => {
         if (mediaRecorderRef.current) {
 
             mediaRecorderRef.current.stop();
+            
             setIsRecording(false);
 
+            // stop all tracks and remove mic in use
+            const tracks = mediaRecorderRef.current.stream.getTracks();
+
+            tracks.forEach(track => track.stop());
         }
+
 
     }
 
