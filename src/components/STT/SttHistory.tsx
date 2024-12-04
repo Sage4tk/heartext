@@ -1,9 +1,13 @@
-import { Table } from "lucide-react";
-import { TableHeader, TableRow, TableHead, TableBody } from "../ui/table";
+import { Table, TableHeader, TableRow, TableHead, TableBody } from "../ui/table";
+import {motion} from "framer-motion";
 
 const SttHistory:React.FC = () => {
     return (
-        <div>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{duration: 0.3, delay: 0.3}}
+        >
             <h2 className="text-xl font-semibold mb-2">Transcript History</h2>
             <div className="rounded-md border">
                 <Table>
@@ -34,7 +38,7 @@ const SttHistory:React.FC = () => {
                     </TableBody>
                 </Table>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
