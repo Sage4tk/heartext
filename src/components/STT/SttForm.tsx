@@ -1,4 +1,4 @@
-import { Mic, Send, Upload } from "lucide-react";
+import { FileWarning, Mic, Send, Upload } from "lucide-react";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { useRef, useState } from "react";
@@ -87,7 +87,33 @@ const SttForm:React.FC = () => {
 
     }
 
-    const handleFileUpload = () => {
+    const uploadAudioFile = (event:React.ChangeEvent<HTMLInputElement>) => {
+
+        // get file
+        const files = event.target.files;
+
+        // return out if nothing
+        if (!files || files.length === 0) return;
+
+        // get audio file
+        const audioFile = files[0];
+
+        if (!audioFile) return;
+
+        // set allowed types
+        const allowedTypes = ["audio/mpeg", "audio/mp4", "audio/wav"];
+
+        // check allowed types and return out and display that wrong file type is uploaded
+        if (!allowedTypes.includes(audioFile.type)) {
+
+            toast("Wrong file type", {
+                important: true,
+                icon: <FileWarning className="h-5 w-5" />
+            })
+
+            return;
+        }
+
 
     }
 
@@ -111,7 +137,7 @@ const SttForm:React.FC = () => {
                 <label>
                     <Upload className="mr-2 h-4 w-4" />
                     Upload Audio
-                    <input type="file" accept="audio/*" onChange={handleFileUpload} className="hidden" />
+                    <input type="file" accept=".mp3, .mpeg, .mpga, .m4a, .wav" onChange={uploadAudioFile} className="hidden" />
                 </label>
                 </Button>
                 {audioUrl && (
